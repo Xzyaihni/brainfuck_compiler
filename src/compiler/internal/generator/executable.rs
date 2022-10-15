@@ -421,7 +421,7 @@ impl Writer
         let shstr_name = ".shstrtab";
         let shstr_len = self.shstr_table.strings.len() + shstr_name.len();
         let (index, offset) = self.consecutive_section(
-            &shstr_name,
+            shstr_name,
             3, //SHT_STRTAB
             0, //none
             offset,
@@ -535,7 +535,7 @@ impl Writer
         self.program_bytes.clear();
         instructions.iter().for_each(|instr|
         {
-            self.program_bytes.extend(instr.as_bytes(Some(addresser)).into_iter());
+            self.program_bytes.extend(instr.as_bytes(Some(addresser)).iter());
         });
     }
 
@@ -543,7 +543,7 @@ impl Writer
     {
         data.iter().for_each(|var|
         {
-            self.program_data.extend(var.as_bytes().into_iter());
+            self.program_data.extend(var.as_bytes().iter());
         });
     }
 

@@ -7,7 +7,7 @@ mod compiler;
 
 fn help_message() -> !
 {
-    let executable = env::args().nth(0).expect("all programs have a name");
+    let executable = env::args().next().expect("all programs have a name");
     eprintln!("usage: {executable} [args] filepath");
     process::exit(1);
 }
